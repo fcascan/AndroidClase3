@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login_fragment">
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.fcascan.clase3.fragments.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_player_dashboard_fragment"
+            app:destination="@id/player_dashboard_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/player_dashboard_fragment"
+        android:name="com.fcascan.clase3.fragments.PlayerDashboardFragment"
+        android:label="player_dashboard_fragment_label"
+        tools:layout="@layout/player_dashboard_fragment">
+        <argument
+            android:name="paramUserMail"
+            app:argType="string"
+            android:defaultValue="emailAdress@mail.com" />
+        <action
+            android:id="@+id/action_playerDashboardFragment_to_playerDetailFragment"
+            app:destination="@id/player_detail_fragment" />
+        <action
+            android:id="@+id/action_player_dashboard_fragment_to_loginFragment"
+            app:destination="@id/login_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/player_detail_fragment"
+        android:name="com.fcascan.clase3.fragments.PlayerDetailFragment"
+        android:label="player_dashboard_fragment_label"
+        tools:layout="@layout/player_detail_fragment">
+        <action
+            android:id="@+id/action_playerDetailFragment_to_playerDashboardFragment"
+            app:destination="@id/player_dashboard_fragment" />
+        <argument
+            android:name="playerID"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+</navigation>
