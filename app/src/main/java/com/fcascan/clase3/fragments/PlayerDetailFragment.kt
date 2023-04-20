@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.fcascan.clase3.R
 import com.fcascan.clase3.entities.Player
 import com.fcascan.clase3.entities.PlayerRepository
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.bumptech.glide.Glide
 
 class PlayerDetailFragment : Fragment() {
     private var playerID: Int? = null   //Input Parameter
@@ -25,7 +25,7 @@ class PlayerDetailFragment : Fragment() {
     lateinit var txtAge : TextView
     lateinit var txtPosition : TextView
     lateinit var txtTeam : TextView
-//    lateinit var txtAvatar : ImageView
+    lateinit var imgAvatar : ImageView
     lateinit var btnBack : Button
 
     var playersRepository: PlayerRepository = PlayerRepository()
@@ -47,7 +47,7 @@ class PlayerDetailFragment : Fragment() {
         txtAge = v.findViewById(R.id.txtAge)
         txtPosition = v.findViewById(R.id.txtPosition)
         txtTeam = v.findViewById(R.id.txtTeam)
-//        txtAvatar = v.findViewById(R.id.txtAvatar)
+        imgAvatar = v.findViewById(R.id.imgAvatar)
         btnBack = v.findViewById(R.id.btnBack)
         return v
     }
@@ -68,7 +68,13 @@ class PlayerDetailFragment : Fragment() {
         txtAge.text = "Age: " + player.age.toString()
         txtPosition.text = "Position: " + player.position
         txtTeam.text = "Country: " + player.team
-//        txtAvatar.text = player.avatar
+
+        Glide.with(this)
+            .load(player.imageUrl)
+            .centerCrop()
+            .circleCrop()
+            .sizeMultiplier(0.25f)
+            .into(imgAvatar)
 
         btnBack.setOnClickListener {
             findNavController().navigate(PlayerDetailFragmentDirections.actionPlayerDetailFragmentToPlayerDashboardFragment())
